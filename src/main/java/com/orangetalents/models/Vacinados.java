@@ -18,29 +18,17 @@ public class Vacinados implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@NotBlank
+	@NotBlank(message = "O campo nome da vacina é de preenchimento obrigatório.")
 	private String nomeVacina;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	@NotNull
+	@NotNull(message = "O campo data da vacina é de preenchimento obrigatório.")
 	private Date dataVacina;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuarios_id")
 	@NotNull(message = "Este campo não pode ser nulo")
 	private Usuarios usuarios;
-
-	public Vacinados() {
-		super();
-	}
-
-	public Vacinados(long id, @NotBlank String nomeVacina, @NotNull Date dataVacina, Usuarios usuarios) {
-		super();
-		this.id = id;
-		this.nomeVacina = nomeVacina;
-		this.dataVacina = dataVacina;
-		this.usuarios = usuarios;
-	}
 
 	public long getId() {
 		return id;
@@ -73,4 +61,5 @@ public class Vacinados implements Serializable {
 	public void setUsuarios(Usuarios usuarios) {
 		this.usuarios = usuarios;
 	}
+
 }

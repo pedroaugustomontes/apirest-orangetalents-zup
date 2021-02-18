@@ -2,6 +2,8 @@ package com.orangetalents.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.orangetalents.models.Usuarios;
 import com.orangetalents.repository.UsuariosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,7 @@ public class VacinadosResources {
 
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Vacinados salvarVacinado(@RequestBody Vacinados vacinados) {
+	public Vacinados salvarVacinado(@Valid @RequestBody Vacinados vacinados) {
 		Usuarios usuarios = usuariosRepository.findById(vacinados.getUsuarios().getId());
 		vacinados.setUsuarios(usuarios);
 		return vacinadosRepository.save(vacinados);

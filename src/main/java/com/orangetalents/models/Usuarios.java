@@ -30,49 +30,25 @@ public class Usuarios implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "O campo nome é de preenchimento obrigatório.")
     private String nome;
 
     @Email
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "O campo email é de preenchimento obrigatório.")
     private String email;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @NotNull
+    @NotNull(message = "O campo nascimento é de preenchimento obrigatório.")
     private Date nascimento;
 
     @CPF
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "O campo CPF é de preenchimento obrigatório.")
     private String cpf;
 
     @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
     private List<Vacinados> vacinados;
-
-    public Usuarios() {
-        super();
-    }
-
-    public Usuarios(long id) {
-        super();
-        this.id = id;
-    }
-
-    public Usuarios(String id) {
-        super();
-        this.id = Long.parseLong(id);
-    }
-
-    public Usuarios(long id, @NotBlank String nome, @Email @NotBlank String email, @NotNull Date nascimento,
-                    @CPF @NotBlank String cpf) {
-        super();
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.nascimento = nascimento;
-        this.cpf = cpf;
-    }
 
     public long getId() {
         return id;
